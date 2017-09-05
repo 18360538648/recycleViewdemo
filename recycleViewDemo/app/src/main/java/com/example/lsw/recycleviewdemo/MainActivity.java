@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "点击" + position, Toast.LENGTH_LONG).show();
             }
         });
+        recyclerView.addItemDecoration();
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
