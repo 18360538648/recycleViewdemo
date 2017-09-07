@@ -29,26 +29,23 @@ public class MainActivity extends AppCompatActivity {
         }
         myAdapter = new MyAdapter(list);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        // 一定要设置setLayoutManager，否则绘制不出来布局
 //        // 第三个参数是数据是否倒置
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         // gridview效果
 //        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setAdapter(new MyAdapter(list));
         // 瀑布流效果，每一个项大小不一致
-//        recyclerView.setAdapter(new MyAdapter(list));
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
+//        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
 //        recyclerView.setAdapter(new MyStaggerAdapter(list));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myAdapter);
         myAdapter.setItemClick(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getApplicationContext(), "点击" + position, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "click me", Toast.LENGTH_SHORT).show();
             }
         });
-        recyclerView.addItemDecoration();
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    public void add(View view) {
-        myAdapter.addItem(3);
     }
 }

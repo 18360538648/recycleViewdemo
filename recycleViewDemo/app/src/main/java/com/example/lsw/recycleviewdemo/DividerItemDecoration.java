@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Luosiwei on 2017/9/5.
@@ -21,7 +22,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     };
     private Drawable mDivider;
 
-    private DividerItemDecoration(Context context, int orientation) {
+    public DividerItemDecoration(Context context, int orientation) {
         this.mContext = context;
         this.mOrientaion = orientation;
         TypedArray typedArray = context.obtainStyledAttributes(attrs);
@@ -32,7 +33,53 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        if (mOrientaion == LinearLayoutManager.HORIZONTAL) {
+            drawVertical(c, parent);
+        } else {
+            drawHorizonal(c, parent);
+        }
         super.onDraw(c, parent, state);
+    }
+
+    /**
+     * 画水平分割线
+     *
+     * @param c
+     * @param parent
+     */
+    private void drawHorizonal(Canvas c, RecyclerView parent) {
+        int left = parent.getPaddingLeft();
+        int right = parent.getWidth() + left - parent.getPaddingRight();
+        int childrenNum = parent.getChildCount();
+        for (int i = 0; i < childrenNum; i++) {
+            // 得到每一项View对象
+            View childrenView = parent.getChildAt(i);
+            RecyclerView.LayoutParams rl = (RecyclerView.LayoutParams) childrenView.getLayoutParams();
+            int top = childrenView.getBottom() + rl.getMarginEnd();
+            int bottom = top + mDivider.getIntrinsicHeight();
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
+    }
+
+    /**
+     * 画竖直分割线
+     *
+     * @param c
+     * @param parent
+     */
+    private void drawVertical(Canvas c, RecyclerView parent) {
+        int top = parent.getPaddingTop();
+        int bottom = parent.getBottom();
+        int childrenNum = parent.getChildCount();
+        for (int i = 0; i < childrenNum; i++) {
+            View childrenView = parent.getChildAt(i);
+            ViewGroup.LayoutParams rl = childrenView.getLayoutParams();
+            int left = parent.getPaddingLeft() + childrenView.getRight();
+            int right = left + mDivider.getIntrinsicWidth();
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
     }
 
     @Override
