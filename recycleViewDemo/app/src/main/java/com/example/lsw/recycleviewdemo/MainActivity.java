@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 30; i++) {
             list.add("item" + i);
         }
+        initViews();
+    }
+
+    private void initViews() {
         myAdapter = new MyAdapter(list);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         // 一定要设置setLayoutManager，否则绘制不出来布局
@@ -51,4 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void addItem(View v){
+        myAdapter.addItem(3);
+    }
+
 }
