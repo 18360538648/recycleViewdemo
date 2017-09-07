@@ -31,14 +31,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         // 一定要设置setLayoutManager，否则绘制不出来布局
 //        // 第三个参数是数据是否倒置
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         // gridview效果
-//        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(new MyAdapter(list));
         // 瀑布流效果，每一个项大小不一致
 //        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
 //        recyclerView.setAdapter(new MyStaggerAdapter(list));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+        // gridView分割线
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(this, 3));
+        // Listview分割线
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(myAdapter);
         myAdapter.setItemClick(new MyAdapter.OnItemClickListener() {
