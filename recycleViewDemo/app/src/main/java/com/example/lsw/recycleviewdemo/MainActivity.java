@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 60; i++) {
             list.add("item" + i);
         }
         initViews();
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL));
 //        recyclerView.setAdapter(new MyStaggerAdapter(list));
         // gridView分割线
-        recyclerView.addItemDecoration(new DividerGridItemDecoration(this, 3));
+        recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         // Listview分割线
 //        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void addItem(View v){
+
+    public void addItem(View v) {
         myAdapter.addItem(3);
     }
 
