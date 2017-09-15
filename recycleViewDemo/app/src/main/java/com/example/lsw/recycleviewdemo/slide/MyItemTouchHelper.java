@@ -61,7 +61,9 @@ public class MyItemTouchHelper extends ItemTouchHelper.Callback {
     // 没有item选中时
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        // 恢复透明度和背景颜色，否者会出现viewholder复用出现问题
         viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+        viewHolder.itemView.setAlpha(1);
         super.clearView(recyclerView, viewHolder);
     }
 
